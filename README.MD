@@ -7,7 +7,7 @@ This project demonstrates how to solve a common retail problem: tracking down wh
 ## Project Navigation
 Select the document you want to review:
 
-* **For Business Leaders:** Read the [Q2 Performance & Actionable Insights Report](Q2 Performance Report.md). This shows how operational bottlenecks are pinpointed and turned into clear, practical business advice.
+* **For Business Leaders:** Read the [Q2 Performance & Actionable Insights Report](Q2_Performance_Report.md). This shows how operational bottlenecks are pinpointed and turned into clear, practical business advice.
     
 * **For Technical Reviewers:** Read below to see how the data was built, the tools used, and the design choices behind the project.[Python code flowchart](config_routing_map.html.pdf)
 *Note: I am happy to walk through the backend Python code and logic during an interview.*
