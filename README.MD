@@ -43,3 +43,5 @@ To keep the focus entirely on buying patterns and sales analysis, secondary admi
 The final deliverable is a clean, easy-to-read Excel [workbook](pearltea_transactions_github.xlsx).
 * **Data Security:** All raw, row-by-row transaction data was removed after aggregation to protect privacy and keep the file size light.
 * **User Interface:** The dashboard uses standard formulas to pull data from a summary tab. This keeps the reporting cards fully interactive but prevents anyone from extracting raw, underlying transaction data.
+
+[![View Full Size Dashboard](excel_dashboard_thumb.png)](excel_dashboard.png)
