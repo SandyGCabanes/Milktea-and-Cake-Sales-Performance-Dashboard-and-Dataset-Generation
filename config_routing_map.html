@@ -1,0 +1,180 @@
+<h2 class="sr-only">Diagram showing which config constants in generate_dataset_annotated_v7.py route through a helper function versus feed Section 3 or Section 4 directly</h2>
+<style>
+:root, h2 {
+  font-family: Cambria, Georgia, serif;
+  --font-sans: Cambria, Georgia, serif;
+}
+.chip,.pill,.badge{background:var(--fill);border:0.5px solid var(--stroke);color:var(--text);border-radius:6px;padding:3px 8px;font-size:12px;display:inline-block;white-space:nowrap;font-family:var(--font-mono)}
+.badge{font-family:var(--font-sans);font-weight:500}
+.chip-config{--fill:#E6F1FB;--stroke:#185FA5;--text:#0C447C}
+.chip-helper{--fill:#EEEDFE;--stroke:#534AB7;--text:#3C3489}
+.badge-s3{--fill:#E1F5EE;--stroke:#0F6E56;--text:#085041}
+.badge-s4{--fill:#FAECE7;--stroke:#993C1D;--text:#712B13}
+@media(prefers-color-scheme:dark){
+.chip-config{--fill:#0C447C;--stroke:#85B7EB;--text:#B5D4F4}
+.chip-helper{--fill:#3C3489;--stroke:#AFA9EC;--text:#CECBF6}
+.badge-s3{--fill:#085041;--stroke:#5DCAA5;--text:#9FE1CB}
+.badge-s4{--fill:#712B13;--stroke:#F0997B;--text:#F5C4B3}
+}
+.lane{display:grid;grid-template-columns:190px 20px 190px 20px 56px 20px 1fr;align-items:center;gap:6px;padding:9px 0;border-bottom:1px solid var(--border)}
+.lane-d{display:grid;grid-template-columns:190px 20px 1fr 20px 150px;align-items:center;gap:6px;padding:9px 0;border-bottom:1px solid var(--border)}
+.cfgs,.tgt{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.arrow{color:var(--text-muted);text-align:center;font-size:15px}
+.out{color:var(--text-secondary);font-size:12px;text-align:center}
+.note{color:var(--text-secondary);font-size:12px}
+.helper2{font-size:11px;color:var(--text-muted);margin-top:2px}
+.panel{border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.panel-title{font-size:14px;font-weight:500;color:var(--text-primary);margin-bottom:8px}
+</style>
+
+<div class="panel">
+  <div class="panel-title">Path A — routes through a helper function</div>
+
+  <div class="lane">
+    <div class="cfgs"><span class="chip chip-config">START_DATE</span><span class="chip chip-config">END_DATE</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">date_range()</span></div>
+    <div class="arrow">→</div>
+    <div class="out">dates</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s3">Section 3</span><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane">
+    <div class="cfgs"><span class="chip chip-config">MONTHLY_TREND</span><span class="chip chip-config">CORE_MONTHLY_OVERRIDE</span><span class="chip chip-config">CORE_SPIKE_TREND</span><span class="chip chip-config">SPIKE_START_DATE</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">get_core_trend()</span></div>
+    <div class="arrow">→</div>
+    <div class="out">trend</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s3">Section 3</span></div>
+  </div>
+
+  <div class="lane">
+    <div class="cfgs"><span class="chip chip-config">BRANCHES</span><span class="chip chip-config">BRANCH_MONTHLY_NOISE</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">branch_for_month()</span><div class="helper2">↳ weighted_choice()</div></div>
+    <div class="arrow">→</div>
+    <div class="out">branch</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane">
+    <div class="cfgs"><span class="chip chip-config">CHANNEL_BASE</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">channel_for_month()</span><div class="helper2">↳ weighted_choice()</div></div>
+    <div class="arrow">→</div>
+    <div class="out">channel</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane">
+    <div class="cfgs"><span class="chip chip-config">HOUR_WEIGHTS</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">sample_hour()</span><div class="helper2">↳ weighted_choice()</div></div>
+    <div class="arrow">→</div>
+    <div class="out">hour</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane" style="border-bottom:none">
+    <div class="cfgs"><span class="chip chip-config">CORE_QTY_WEIGHTS</span></div>
+    <div class="arrow">→</div>
+    <div><span class="pill chip-helper">weighted_choice()</span><div class="helper2">called directly, no wrapper</div></div>
+    <div class="arrow">→</div>
+    <div class="out">qty</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">Path B — feeds a section directly, no helper</div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">CORE_PRODUCTS</span></div>
+    <div class="arrow">→</div>
+    <div class="note">loop structure, base daily count, category, price range</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s3">Section 3</span><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">WEEKDAY_MULT</span></div>
+    <div class="arrow">→</div>
+    <div class="note">day-of-week multiplier in the daily volume formula</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s3">Section 3</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">DEPENDENT_PRODUCTS</span></div>
+    <div class="arrow">→</div>
+    <div class="note">category + price range for any add-on that wins its roll</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">ATTACH_WEIGHTS</span></div>
+    <div class="arrow">→</div>
+    <div class="note">starting attach_chances, before any adjustment below</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">DIP_BOOST</span></div>
+    <div class="arrow">→</div>
+    <div class="note">adjustment 1 — slow-day boost to every add-on chance</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">WARM_MONTHS</span><span class="chip chip-config">WARM_MULTIPLIER</span></div>
+    <div class="arrow">→</div>
+    <div class="note">adjustment 2 — seasonal lift for Iced Drink and Lemonade Fruit Cup</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">SPIKE_START_DATE</span></div>
+    <div class="arrow">→</div>
+    <div class="note">adjustment 3 trigger — pre/post cutoff check (also feeds get_core_trend above)</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d">
+    <div class="cfgs"><span class="chip chip-config">DEPENDENT_SPIKE_MULTIPLIER</span></div>
+    <div class="arrow">→</div>
+    <div class="note">adjustment 3 — Iced Drink's post-spike multiplier</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+
+  <div class="lane-d" style="border-bottom:none">
+    <div class="cfgs"><span class="chip chip-config">DEPENDENT_MONTH_ADJUST</span></div>
+    <div class="arrow">→</div>
+    <div class="note">adjustment 4 — Lemonade Fruit Cup's June cut</div>
+    <div class="arrow">→</div>
+    <div class="tgt"><span class="badge badge-s4">Section 4</span></div>
+  </div>
+</div>
+
+<div style="display:flex;align-items:stretch;gap:16px">
+  <div class="panel" style="flex:1;margin-bottom:0">
+    <div class="panel-title"><span class="badge badge-s3">Section 3</span> daily counts</div>
+    <div class="note">→ daily_volume, monthly_avg (in memory)<br>→ trend_debug.csv<br>→ staging/*.csv</div>
+  </div>
+  <div style="display:flex;align-items:center;font-size:20px;color:var(--text-muted)">→</div>
+  <div class="panel" style="flex:1;margin-bottom:0">
+    <div class="panel-title"><span class="badge badge-s4">Section 4</span> transactions</div>
+    <div class="note">→ transactions.csv<br>→ product_block_summary.csv</div>
+  </div>
+</div>
