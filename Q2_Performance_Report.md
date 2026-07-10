@@ -35,3 +35,6 @@
 * **Investigate delivery operations:** Audit the branch-level packing and dispatch process for app orders, focusing on order accuracy (customization compliance, missing items) and spill-proof packaging.
 * **Audit product quality and supply chain:** Review store-level inventory handling, dairy holding temperatures, and transit shelf-life at high-volume locations like SM Megamall to rule out any consistency or freshness issues.
 * **Gather frontline feedback:** Run structured interviews with store staff and delivery riders to identify common operational bottlenecks, customer complaints, or aggressive competitive moves in the area.
+
+* ![Excel dashboard report](excel_dashboard.png)
+* [Excel file](pearltea_transactions_github.xlsx).
