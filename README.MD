@@ -9,14 +9,14 @@ Select the document you want to review:
 
 * **For Business Leaders:** Read the [Q2 Performance & Actionable Insights Report](Q2 Performance Report.md). This shows how operational bottlenecks are pinpointed and turned into clear, practical business advice.
     
-* **For Technical Reviewers:** Read below to see how the data was built, the tools used, and the design choices behind the project.[Python code flowchart](config_routing_map.html)
+* **For Technical Reviewers:** Read below to see how the data was built, the tools used, and the design choices behind the project.[Python code flowchart](config_routing_map.html.pdf)
 *Note: I am happy to walk through the backend Python code and logic during an interview.*
 
 ## Challenge, Solution and Scope
 
 ### The Data Challenge
 * **The Problem:** Real company data is private, but standard public datasets are usually too clean and perfect. They lack the messy, day-to-day operational variations and regional trends seen in a real business.
-* **The Solution:** A custom Python script generated a realistic database from scratch. Seasonal trends, differences between branches, and specific sales drops were intentionally built in to mimic a live business. SQLite was used to inspect and clean up the data at every step.
+* **The Solution:** A custom Python script generated a realistic dataset from scratch. Seasonal trends, differences between branches, and specific sales drops were intentionally built in to mimic a live business. SQLite was used to inspect and clean up the data at every step.
 
 ### Case Study Scope
 The data simulates a fast-casual retail operation with five branches selling milk tea and cakes:
@@ -30,9 +30,9 @@ To keep the focus entirely on buying patterns and sales analysis, secondary admi
 * No complex payment issues like partial refunds or canceled transactions.
 
 ### Core Skills Demonstrated
-1. **Data Generation:** Creating mock sales logs that actually look like real-world retail shopping habits.
+1. **Dataset Generation:** Creating mock sales logs that actually look like real-world retail shopping habits.
 2. **Root-Cause Analysis:** Drilling down into product categories, delivery apps/walk-ins and branches to find the exact reason for a sales dip.
-3. **Data Prep:** Managing database tables in SQLite and organizing clean data summaries for Excel.
+3. **Data Prep:** Exploring database tables in SQLite and organizing clean data summaries for Excel.
 
 ## Data Governance & Safety
 * **Public View:** Executive report and the final secure Excel file are available here in the repository. Backend flowchart for the python script is also included.
