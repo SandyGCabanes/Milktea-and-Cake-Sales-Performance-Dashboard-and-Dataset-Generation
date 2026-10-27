@@ -29,7 +29,7 @@ To keep the focus entirely on buying patterns and sales analysis, secondary admi
 * No tax or VAT breakdowns.
 * No complex payment issues like partial refunds or canceled transactions.
 
-### Core Skills Demonstrated
+### Tooling and Practices
 1. **Dataset Generation:** Creating mock sales logs that actually look like real-world retail shopping habits.
 2. **Root-Cause Analysis:** Drilling down into product categories, delivery apps/walk-ins and branches to find the exact reason for a sales dip.
 3. **Data Prep:** Exploring database tables in SQLite and organizing clean data summaries for Excel.
